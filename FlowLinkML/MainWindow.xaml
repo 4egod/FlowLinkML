@@ -1,0 +1,76 @@
+﻿<Window x:Class="FlowLinkML.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlowLinkML"
+        xmlns:d3="clr-namespace:InteractiveDataDisplay.WPF;assembly=InteractiveDataDisplay.WPF"
+        mc:Ignorable="d"
+        Title="FlowLink ML Test" Height="700" Width="1056" WindowStartupLocation="CenterScreen" Initialized="Window_Initialized" ResizeMode="CanMinimize">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <d3:Chart Name="train_chart" LeftTitle="Volume" Width="600" >
+            </d3:Chart>
+            <TextBox Name="log" Width="220" Margin="5, 0, 5,0" IsReadOnly="True" TextWrapping="WrapWithOverflow"></TextBox>
+
+            <StackPanel Width="200">
+                <GroupBox Header="Device Id:">
+                    <TextBox Name="train_device" Text="466" Margin="5"/>
+                </GroupBox>
+                <GroupBox Header="Training:" InputScope="Xml">
+                    <ItemsControl>
+                        <ComboBox Name="train_month" Margin="5" SelectedIndex="8">
+                            <ComboBoxItem Content="January"/>
+                            <ComboBoxItem Content="February"/>
+                            <ComboBoxItem Content="March"/>
+                            <ComboBoxItem Content="April"/>
+                            <ComboBoxItem Content="May"/>
+                            <ComboBoxItem Content="June"/>
+                            <ComboBoxItem Content="July"/>
+                            <ComboBoxItem Content="August"/>
+                            <ComboBoxItem Content="September"/>
+                            <ComboBoxItem Content="October"/>
+                            <ComboBoxItem Content="November"/>
+                            <ComboBoxItem Content="December"/>
+                        </ComboBox>
+                        <Button Name="train_load" Content="Load data from DB" Click="train_load_Click" Margin="5"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Name="export_csv" Content="Export CSV" Click="export_csv_Click" Width="84" Margin="5"/>
+                            <Button Name="import_csv" Content="Import CSV" Click="import_csv_Click" Width="84" Margin="5"/>
+                        </StackPanel>
+                        
+                        <GroupBox Header="Select features:">
+                            <ItemsControl Margin="5">
+                                <CheckBox Content="Timestamp" IsChecked="True" IsEnabled="False" Margin="2"/>
+                                <CheckBox Name="cb_dp" IsChecked="True" Content="DifferentialPressure" Margin="2"/>
+                                <CheckBox Name="cb_p" IsChecked="True" Content="Pressure" Margin="2"/>
+                                <CheckBox Name="cb_t" IsChecked="True" Content="Temperature" Margin="2"/>
+                                <CheckBox Name="cb_ft" IsChecked="True" Content="Flow Time" Margin="2"/>
+                            </ItemsControl>
+                        </GroupBox>
+
+                        <Button Name="train_model" Content="Train ML model" Click="train_model_Click" Margin="5"/>
+                        <Button Name="train_test" Content="Test ML model" Click="train_test_Click" Margin="5"/>
+                    </ItemsControl>
+
+                </GroupBox>
+
+                <GroupBox Header="Prediction:" IsManipulationEnabled="True">
+                    <ItemsControl>
+                        <StackPanel>
+                            <Calendar Name="predict_calendar" SelectedDatesChanged="predict_calendar_SelectedDatesChanged"/>
+                        </StackPanel>
+                        <Button Name="predict_load" Content="Load actual data" Click="predict_load_Click" Margin="5"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Name="export_predict_csv" Content="Export CSV" Click="export_predict_csv_Click" Width="84" Margin="5"/>
+                            <Button Name="import_predict_csv" Content="Import CSV" Click="import_predict_csv_Click" Width="84" Margin="5"/>
+                        </StackPanel>
+                        <Button Name="predict_predict" Content="Make a prediction" Click="predict_predict_Click" Margin="5"/>
+                    </ItemsControl>
+
+                </GroupBox>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>
