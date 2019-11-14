@@ -5,6 +5,7 @@ using System.Text;
 
 namespace FlowLinkML
 {
+    using FlowLinkML.Properties;
     using Models;
 
     public class AppContext : DbContext
@@ -16,7 +17,7 @@ namespace FlowLinkML
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("");
+            optionsBuilder.UseNpgsql(Resources.connection_string);
         }
     }
 }
